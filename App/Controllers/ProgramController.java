@@ -27,25 +27,14 @@ public class ProgramController  {
         Instruction instruction = new Instruction();
   
         instruction.setMnemonic(commands[0].toUpperCase());
-  
+        
         if(commands.length > 1){
-          int op1;
-          if(commands[1].charAt(0) == '#'){
-            op1 = Integer.parseInt(commands[1].substring(1,commands[1].length()));
-          }else{
-            op1 = app.MD.getData(Integer.parseInt(commands[1]));
-            if(instruction.getMnemonic().contains("ST")) op1 = Integer.parseInt(commands[1]);
-          }
+          int op1 = Integer.parseInt(commands[1]);
           instruction.setOP1(op1);
         }
-  
+        
         if(commands.length > 2){
-          int op2;
-          if(commands[2].charAt(0) == '#'){
-            op2 = Integer.parseInt(commands[2].substring(1,commands[2].length()));
-          }else{
-            op2 = app.MD.getData(Integer.parseInt(commands[2]));
-          }
+          int op2 = Integer.parseInt(commands[2]);
           instruction.setOP2(op2);
         }
   
@@ -88,23 +77,12 @@ public class ProgramController  {
       instruction.setMnemonic(commands[0].toUpperCase());
 
       if(commands.length > 1){
-        int op1;
-        if(commands[1].charAt(0) == '#'){
-          op1 = Integer.parseInt(commands[1].substring(1,commands[1].length()));
-        }else{
-          op1 = app.MD.getData(Integer.parseInt(commands[1]));
-          if(instruction.getMnemonic().contains("ST")) op1 = Integer.parseInt(commands[1]);
-        }
+        int op1 = Integer.parseInt(commands[1]);
         instruction.setOP1(op1);
       }
 
       if(commands.length > 2){
-        int op2;
-        if(commands[2].charAt(0) == '#'){
-          op2 = Integer.parseInt(commands[2].substring(1,commands[2].length()));
-        }else{
-          op2 = app.MD.getData(Integer.parseInt(commands[2]));
-        }
+        int op2 = Integer.parseInt(commands[2]);
         instruction.setOP2(op2);
       }
 
@@ -125,6 +103,24 @@ public class ProgramController  {
       window.registradores.regX.setText(Integer.toString(app.ULA.getX()));
     }catch(Exception err){
       window.createError("Ocorreu um erro na execução! Verifique o código na linha " + Integer.toString(App.App.current.UC.getPC() + 1) + ".");
+    }
+  }
+
+  public static void clear(){
+    App.App app = App.App.current;
+    Window window = Window.current;
+    
+    app.ULA.setA(0);
+    app.ULA.setB(0);
+    app.ULA.setX(0);
+
+    window.registradores.regA.setText(Integer.toString(app.ULA.getA()));
+    window.registradores.regB.setText(Integer.toString(app.ULA.getB()));
+    window.registradores.regX.setText(Integer.toString(app.ULA.getX()));
+    
+    for(int i = 0; i < app.MD.qtPos; i++){
+      app.MD.setPosition(i, 0);
+      window.MDArea.setPosition(i, Integer.toString(app.MD.getData(i)));
     }
   }
 }

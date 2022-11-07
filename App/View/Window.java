@@ -5,6 +5,7 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 
+import App.View.Components.ClearButton;
 import App.View.Components.CompileButton;
 import App.View.Components.ErrorFrame;
 import App.View.Components.HelpButton;
@@ -26,6 +27,7 @@ public class Window extends JFrame {
   public RunButton runButton;
   public CompileButton compileButton;
   public HelpButton helpButton;
+  public ClearButton clearButton;
 
   public Window(){
     this.setLayout(null);
@@ -45,6 +47,7 @@ public class Window extends JFrame {
     runButton = new RunButton(container);
     compileButton = new CompileButton(container);
     helpButton = new HelpButton(container);
+    clearButton = new ClearButton(container);
 
 
     container.revalidate();
